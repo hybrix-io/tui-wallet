@@ -1,0 +1,10 @@
+#!/bin/sh
+TARGET=$@
+OLDPATH=$PATH
+WHEREAMI=`pwd`
+export PATH=$WHEREAMI/node/bin:"$PATH"
+NPMINST=`which npm`
+
+$WHEREAMI/node_modules/npm/bin/npm-cli.js install $TARGET
+
+export PATH=$OLDPATH

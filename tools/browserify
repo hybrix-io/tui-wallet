@@ -1,0 +1,18 @@
+#!/bin/sh
+OLDPATH=$PATH
+WHEREAMI=`pwd`
+export PATH=$WHEREAMI/node/bin:"$PATH"
+NODEINST=`which node`
+
+echo Browserifying $1 ...
+node_modules/browserify/bin/cmd.js $1 -o $1.browserify.js
+echo Minifying $1 ...
+node_modules/minifier/index.js $1.browserify.js --output $1.minify.js
+echo LZMA packing $1 ...
+tools/lzmapack.js $1.minify.js
+rm $1.browserify.js
+rm $1.minify.js
+mv $1.minify.js.lzma $1.lzma
+
+PATH=$OLDPATH
+echo "All done. Resulting file: $1.lzma"
