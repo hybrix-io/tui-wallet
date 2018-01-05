@@ -48,17 +48,18 @@ displayAssets = function displayAssets(passdata) {
     UI.edit['Starred'+i] = UI.buttonfunc.make(lang.buttonStarred, UI.box, 14, y, GL.assetsStarred[i].starred ? '*' : 'o', GL.assetsStarred[i].starred ? 'yellow' : 'grey');
     UI.edit['Starred'+i].on('press', function() {
       var index = this.i;
-      var elementY = 3  + (index * 2);
+      var elementY = 3  +(index * 2);
       var assetID = GL.assetsStarred[index].id
       var toggleStarred = !GL.assetsStarred[index].starred;
+      var starredIndex = GL.assetsStarred.findIndex(function (asset) { return asset.id = assetID })
 
-      GL.assetsStarred[index] = {id: assetID, starred: toggleStarred};
+      logger(String(GL.assetsStarred[starredIndex].starred))
+
+      GL.assetsStarred[starredIndex] = {id: assetID, starred: toggleStarred};
       storage.Set(userStorageKey('ff00-0034'), userEncode(GL.assetsStarred));
 
-      UI.edit['Starred'+index]._htemp.bg = toggleStarred ? 'yellow' : 'grey';
-      UI.edit['Starred'+index]._ftemp.bg = toggleStarred ? 'yellow' : 'grey';
-      UI.edit['Starred'+index]._pcontent = toggleStarred ? '*' : 'o';
-      screen.render();
+
+      UI.edit['Starred'+index] = UI.buttonfunc.make(lang.buttonStarred, UI.box, 14, elementY, !GL.assetsStarred[starredIndex].starred ? '*' : 'o', !GL.assetsStarred[starredIndex].starred ? 'yellow' : 'grey');
 
     }.bind({i:i}));
 
