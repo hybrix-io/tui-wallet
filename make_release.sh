@@ -25,6 +25,7 @@ $UGLIFY lib/crypto/nacl.js > $OUTPATH/lib/crypto/nacl.js
 $UGLIFY lib/crypto/sjcl.js > $OUTPATH/lib/crypto/sjcl.js
 $UGLIFY lib/crypto/urlbase64.js > $OUTPATH/lib/crypto/urlbase64.js
 $UGLIFY lib/crypto/sha256.js > $OUTPATH/lib/crypto/sha256.js
+$UGLIFY lib/crypto/hashDJB2.js > $OUTPATH/lib/crypto/hashDJB2.js
 
 $UGLIFY lib/buttons.js > $OUTPATH/lib/buttons.js
 $UGLIFY lib/globals.js > $OUTPATH/lib/globals.js
