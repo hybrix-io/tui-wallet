@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export CLI4IOC_USER="I4X4KG67OBET5TS5"
+export CLI4IOC_PASS="HD6L5K4JEOM2PZNE"
+EXEC=./cli4ioc
+
+# GET HYBRID ADDR
+# $EXEC --addasset eth.xhy
+$EXEC --getaddress eth.xhy |
+    while IFS= read -r line
+    do
+        if [[ "$line" = *"address"* ]]; then
+            ADDRESS="${line//Asset\ ETH.XHY\ address\ is:\ /}"
+        fi;
+    done
