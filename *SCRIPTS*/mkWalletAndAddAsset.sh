@@ -1,7 +1,8 @@
 #!/bin/bash
 EXEC=./testwallet.sh
 INPUT=test.csv
-OUTPUT=output.csv
+OUTPUT=new_wallet_users_succes.csv
+FAILED=new_wallet_users_failed.csv
 OLDIFS=$IFS
 IFS=,
 [ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
@@ -27,20 +28,15 @@ do
             [[ "$line" = *"pass"* ]] && PASS="${line//Your\ pass\ /}";
 
             if [[ "$PASS" != "" ]]; then
-                awk -v userID="$USERID" -v pass="$PASS" -v pattern="$INDEX" '(NR == pattern) {print $0, userID, pass}' $INPUT > $OUTPUT # APPEND USER CREDENTIALS TO OUTPUT FILE.
+                awk -v userID="$USERID" -v pass="$PASS" -v pattern="$INDEX" '(NR == pattern) {print $0, userID, pass}' $INPUT >> $OUTPUT # APPEND USER CREDENTIALS TO OUTPUT FILE.
                 # CALL FN TO ADD ASSETS TO WALLET AND APPEND ASSETS ADDRESSES TO FILE.
                 # ./addAssets.sh "$USERID" "$PASS" "$INDEX" $OUTPUT $ASSETNAMES
-            else
-                echo -e "${RED}[.] Could not create wallet for user no. $INDEX"
-                echo -e "${NC}"
-                awk -v userIndex="$INDEX" '(NR == userIndex) {print $0}' $INPUT >> failed.csv; # APPEND USER TO FAILED OUTPUT FILE
             fi;
         done
     (( INDEX++ ))
 done < $INPUT
 
-# REMOVE USERS FROM INPUT FILE WHEN CREATING WALLET FAILED
-# awk '{if ($4 != "") print $0}' $INPUT > file.tmp && mv file.tmp $INPUT
+awk '{if ($4 != "") print $0}' $INPUT > $FAILED; # APPEND USER TO FAILED OUTPUT FILE
 
 echo '[.] All done.'
 IFS=$OLDIFS
