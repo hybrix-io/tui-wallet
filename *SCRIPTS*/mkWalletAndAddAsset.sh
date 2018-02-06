@@ -21,22 +21,29 @@ do
     echo -e "${GREEN}[.] Creating new user account."
     echo -e "${NC}"
     $EXEC --newaccount |
-        while IFS= read -r line
+        while read -r line
         do
             # CREATE ACCOUNT
             [[ "$line" = *"userID"* ]] && USERID="${line//Your\ userID\ /}";
             [[ "$line" = *"pass"* ]] && PASS="${line//Your\ pass\ /}";
 
             if [[ "$PASS" != "" ]]; then
-                awk -v userID="$USERID" -v pass="$PASS" -v pattern="$INDEX" '(NR == pattern) {print $0, userID, pass}' $INPUT >> $OUTPUT # APPEND USER CREDENTIALS TO OUTPUT FILE.
-                # CALL FN TO ADD ASSETS TO WALLET AND APPEND ASSETS ADDRESSES TO FILE.
-                # ./addAssets.sh "$USERID" "$PASS" "$INDEX" $OUTPUT $ASSETNAMES
-            fi;
+                # ADD ASSETS TO WALLET
+                for asset in "${ASSETNAMES[@]}"
+                do
+                    echo "Adding $asset to wallet."
+                    $EXEC -u $USERID -p $PASS --addasset $asset
+                done
+
+                # APPEND CREDENTIALS TO OUTPUT FILE
+                awk -v userID="$USERID" -v pass="$PASS" -v pattern="$INDEX" '(NR == pattern) {print $0, userID, pass}' $INPUT >> $OUTPUT; # APPEND USER CREDENTIALS TO OUTPUT FILE.
+            fi
         done
     (( INDEX++ ))
 done < $INPUT
 
-awk '{if ($4 != "") print $0}' $INPUT > $FAILED; # APPEND USER TO FAILED OUTPUT FILE
+# COMPARE OUTPUT WITH INPUT AND MOVE MISSING USERS TO FAILED FILE
+awk -v name='$name' '{if ($4 == "") print $0}' $OUTPUT >> $FAILED; # APPEND USER TO FAILED OUTPUT FILE
 
 echo '[.] All done.'
 IFS=$OLDIFS
