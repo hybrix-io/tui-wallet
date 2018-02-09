@@ -27,7 +27,7 @@ do
             [[ "$line" = *"pass"* ]] && pass="${line//Your\ pass\ /}";
 
             if [[ "$pass" != "" ]]; then # ADD ASSETS TO WALLET
-                for asset in "${assetNames[@]}"
+                for asset in "${ASSETNAMES[@]}"
                 do
                     echo "Adding $asset to wallet."
                     $exec -u $user -p $pass --addasset $asset
