@@ -32,7 +32,9 @@
   "license": "ISC",
   "dependencies": {
     "blessed": "^0.1.81",
-    "clipboardy": "^1.2.3"
+    "clipboardy": "^1.2.3",
+    "progress": "^2.0.3",
+    "stdio": "^0.2.7"
   },
   "devDependencies": {}
 }
