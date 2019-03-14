@@ -1,4 +1,4 @@
 storage/*
 node_binaries
-common
+common/*
 interface

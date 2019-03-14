@@ -1,0 +1,32 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "base-x": "*"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-node": "*",
+    "eslint-plugin-promise": "*",
+    "eslint-plugin-standard": "*",
+    "eslint-plugin-react": "*",
+    "eslint-config-standard": "*",
+    "eslint-config-semistandard": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "sh ./scripts/setup/setup.sh",
+    "diag": "sh scripts/diag/diag.sh",
+    "lint": "sh ./scripts/lint/lint.sh common"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/iochq/hybridd/common.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
