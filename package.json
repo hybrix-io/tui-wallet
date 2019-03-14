@@ -1,0 +1,37 @@
+{
+  "name": "tui-wallet",
+  "version": "1.0.0",
+  "description": "textbased user interface wallet for hybrixd",
+  "main": "lib/main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "sh scripts/npm/setup.sh",
+    "diag": "sh scripts/npm/diag.sh",
+    "build": "sh scripts/npm/setup.sh",
+    "lint": "sh ../common/scripts/lint/lint.sh \"tui-wallet\"",
+    "start": "sh tui-wallet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/iochq/hybrixd/client/implementations/tui-wallet.git"
+  },
+  "keywords": [
+    "textbased",
+    "user",
+    "interface",
+    "wallet",
+    "hybrixd",
+    "blockchain",
+    "crypto"
+  ],
+  "author": "Internet of Coins",
+  "license": "ISC",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "clipboardy": "^1.2.3"
+  },
+  "devDependencies": {}
+}
