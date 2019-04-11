@@ -54,6 +54,7 @@ dist:
   - version=${CI_COMMIT_REF_NAME/-release/}
   - component=tui-wallet
   - file=hybrixd.${component}.${version}
+  - fileLatest=hybrixd.${component}.latest
   - path=tui-wallet/${version}/
 
   - ls
@@ -83,6 +84,11 @@ dist:
   - cp ${file}.zip ./dist/${path}${file}.zip
   - cp ${file}.tar.gz ./dist/${path}${file}.tar.gz
   - cp ${file}.tar.xz ./dist/${path}${file}.tar.xz
+  
+  - mkdir -p ./dist/${component}/latest
+  - cp ${file}.zip ./dist/${component}/latest/${fileLatest}.zip
+  - cp ${file}.tar.gz ./dist/${component}/latest/${fileLatest}.tar.gz
+  - cp ${file}.tar.xz ./dist/${component}/latest/${fileLatest}.tar.xz
 
   # for interface we like to distribute the js files directly as well
   # - cp -r ./${component}/*.js ./dist/${path}
