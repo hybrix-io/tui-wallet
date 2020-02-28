@@ -4,6 +4,7 @@ let clipboardy = require('clipboardy');
 // let spinner = require('../../snippets/spinner');
 const UI = require('../../ui');
 const functions = require('../../functions');
+const transaction = require('../../transaction');
 
 // transaction = require('../../transaction');
 
@@ -180,7 +181,7 @@ exports.display = function (assets) {
 
         UI.edit['SendTx'].on('press', function () {
           // is TX being sent?
-          if (typeof UI.spinner.text['SendTx'] === 'undefined') {
+          if (!UI.spinner.text || typeof UI.spinner.text['SendTx'] === 'undefined') {
             transaction.send({
               element: UI.text['AssetsA-' + symbol],
               asset: symbol,

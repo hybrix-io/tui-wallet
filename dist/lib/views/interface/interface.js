@@ -31,7 +31,7 @@ function refreshAssets () {
       setTimeout(refreshAssets, 5000);
     },
     (error) => {
-      logger(error);
+      UI.log(error);
       setTimeout(refreshAssets, 5000);
     }
   );

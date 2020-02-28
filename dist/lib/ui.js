@@ -1,17 +1,22 @@
+const modal = require('./modal'); // modal functions
+const button = require('./buttons'); // button functions
+const lang = require('./lang'); // button functions
+
 exports.edit = { override: false, hist: [] };
 exports.text = {};
 exports.spinner = {test: {}};
 
 exports.views = {};
-exports.buttonfunc = require('./buttons'); // button functions
-exports.modalfunc = require('./modal'); // modal functions
+
+exports.buttonfunc = button;
+exports.modalfunc = modal;
 
 // global compatibility functions
 exports.alert = function (title, text) {
   if (typeof text !== 'undefined') {
-    UI.modalfunc.alert(title, text);
+    modal.alert(title, text);
   } else {
-    UI.modalfunc.alert(lang.alertTitle, title);
+    modal.alert(lang.alertTitle, title);
   }
 };
 

@@ -8,39 +8,6 @@ global.starredAssets = []; // To be filled with saved starred assets
 
 let screen;
 
-let Decimal = require('../common/crypto/decimal-light');
-
-function fromInt (input, factor) {
-  let f = Number(factor);
-  let x = new Decimal(String(input));
-  return x.times((f > 1 ? '0.' + new Array(f).join('0') : '') + '1');
-}
-
-function toInt (input, factor) {
-  let f = Number(factor);
-  let x = new Decimal(String(input));
-  return x.times('1' + (f > 1 ? new Array(f + 1).join('0') : ''));
-}
-
-function formatFloat (n) {
-  return String(Number(n));
-}
-
-// global compatibility functions
-function alert (title, text) {
-  if (typeof text !== 'undefined') {
-    UI.modalfunc.alert(title, text);
-  } else {
-    UI.modalfunc.alert(lang.alertTitle, title);
-  }
-}
-
-function logger (text) {
-  if (typeof UI !== 'undefined' && typeof UI.logger !== 'undefined') {
-    UI.logger.insertBottom(text);
-  } else { console.log(text); }
-}
-
 function spinnerStart (element) {
   if (typeof UI.spinner.text[element] !== 'undefined') { clearInterval(UI.spinner.text[element].interval); }
   UI.spinner.text[element] = {};
@@ -90,36 +57,6 @@ function spinnerStopAll (element) {
       spinnerStop(key);
     });
   }
-}
-
-function getDollarPrices (cb) {
-  /* najax({
-     url: 'https://api.coinmarketcap.com/v1/ticker/?limit=0',
-     dataType: 'json',
-     timeout: 30000,
-     success: function (data) {
-     //      GL.coinMarketCapTickers = data; TODO ROUKE
-     cb(cb);
-     },
-     error: function (e) {
-     //  GL.coinMarketCapTickers = []; TODO ROUKE
-     cb(e);
-     }
-     }); */
-
-  cb();
-}
-
-function renderDollarPrice (symbolName, assetAmount) {
-  /* let assetSymbolUpperCase = symbolName.toUpperCase();
-  let tickers = GL.coinMarketCapTickers;
-  let matchedTicker = tickers.filter(function (ticker) {
-    return ticker.symbol === assetSymbolUpperCase;
-  });
-
-  return matchedTicker.length !== 0
-    ? (assetAmount * matchedTicker[0].price_usd).toFixed(2)
-    : '{grey-fg}n/a{/grey-fg}'; */
 }
 
 // Toggle DEBUG
