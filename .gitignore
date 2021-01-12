@@ -2,3 +2,4 @@ storage/*
 node_binaries
 common/*
 interface/*
+var/*
