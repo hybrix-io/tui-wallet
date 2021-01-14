@@ -10,7 +10,7 @@ build:
   stage: build
   script:
     - cd ..
-    - "git clone -n https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/hybrix/hybrixd/client/implementations/web-wallet/tui-wallet.git --depth 10 --single-branch --branch $CI_COMMIT_REF_NAME"
+    - "git clone -n https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/hybrix/hybrixd/client/implementations/tui-wallet/tui-wallet.git --depth 10 --single-branch --branch $CI_COMMIT_REF_NAME"
     - cd tui-wallet
     - if git log | grep $CI_COMMIT_SHA; then
     -   echo "Commit $CI_COMMIT_SHA exists, retrieving it."
